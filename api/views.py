@@ -1,4 +1,6 @@
 from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
+
 from backend.models import *
 from django.views.decorators.csrf import csrf_exempt
 import json
@@ -11,12 +13,15 @@ table = mongoCon()
 client = MongoClient('mongodb://localhost:27017/')
 
 SUCCESS_INSERT = dict(result="Inserted", message="Insert Successful", success=1)
+ERROR_INVALID_REQUEST_TYPE = dict(result="Error", message="Not a POST Request", success=0)
 ERROR_INSERT = dict(result="Error", message="Must provide atleast one field", success=0)
 ERROR_INVALID_ACCESS_TOKEN = dict(result="Error", message="Invalid Access Token", success=0)
 ERROR_NO_ACCESS_TOKEN = dict(result="Error", message="No Access Token Provided", success=0)
 
 @csrf_exempt
 def v1_insert(request):
+	if request.method != "POST":
+		return HttpResponse(json.dumps(ERROR_INVALID_REQUEST_TYPE), content_type="application/json")
 	access_token = request.POST.get('access_token', None)
 	if access_token is not None:
 		return HttpResponse(json.dumps(table.insert(access_token, request.POST)), content_type="application/json")

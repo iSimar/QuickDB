@@ -50,18 +50,19 @@
 		<form action="" method="POST">
 			<input style="width:300px;" type="email" placeholder="Email" name="emailInput" value="{{ username }}"><br/>
 			<input style="width:300px;" type="password" placeholder="Password" name="passwordInput"><br/>
-      {% if error%}
-        <font style="color:#e74c3c;">
-          Something went wrong, try again.
-        </font><br/>
+      <input style="width:300px;" type="password" placeholder="Confirm Password" name="confirmPasswordInput"><br/>
+      {% if passwordDontMatch%}
+      <font style="color:#e74c3c;">
+          Password does not match, try again.
+      </font><br/>
       {% endif %}
-      {% if userCreated%}
-        <font style="color:#2ecc71;">
-          Account created, you may login.
-        </font><br/>
+      {% if usernameExists%}
+      <font style="color:#e74c3c;">
+          Email invalid or already in use, try again.
+      </font><br/>
       {% endif %}
-			<input class="button-primary" type="button" value="Sign Up" onclick="location.href='signup'">
-			<input class="button-default" type="submit" value="Login">
+      <input class="button-default" type="button" value="Go Home" onclick="location.href='../'">
+			<input class="button-primary" type="submit" value="Sign Up">
 		</form>
 	<center>
   <a href="https://github.com/iSimar/QuickDB"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>

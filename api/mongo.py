@@ -26,7 +26,7 @@ def getTableFields(table):
 
 class mongoCon:
 	def __init__(self, port=27017):
-		print "init mongo connection"
+		# print "init mongo connection"
 		client = MongoClient('mongodb://localhost:'+str(port)+'/')
 
 	def insert(self, access_token, insert_dict=dict()):
